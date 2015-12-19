@@ -13,14 +13,32 @@ var Body = React.createClass({
   },
 
   handleDelete(id) {
-  $.ajax({
-    url: `/api/v1/skills/${id}`,
-    type: 'DELETE',
-    success: () => {
-      this.removeIdeaFromDOM(id);
-    }
-  });
-},
+    $.ajax({
+      url: `/api/v1/skills/${id}`,
+      type: 'DELETE',
+      success: () => {
+        this.removeIdeaFromDOM(id);
+      }
+    });
+  },
+
+  handleUpdate(skill) {
+    $.ajax({
+      url: `/api/v1/skills/${skill.id}`,
+      type: 'PUT',
+      data: { skill: skill },
+      success: () => {
+        this.updateSkills(skill);
+      }
+    });
+  },
+
+  updateSkills(skill) {
+    let skills = this.state.skills.filter( (s) => { return s.id != skill.id })
+
+    this.setState({ skills: skills })
+  },
+
 
   removeIdeaFromDOM(id) {
     let newSkills = this.state.skills.filter((skill) => {
@@ -33,8 +51,10 @@ var Body = React.createClass({
   render() {
     return(
       <div>
-        <NewSkill handleSubmit={this.handleSubmit}/>
-        <AllSkills skills={this.state.skills} handleDelete={this.handleDelete}/>
+        <NewSkill handleSubmit={this.handleSubmit} />
+        <AllSkills skills={this.state.skills}
+                   handleDelete={this.handleDelete}
+                   onUpdate={this.handleUpdate} />
       </div>
     )
   }
