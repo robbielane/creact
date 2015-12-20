@@ -35,6 +35,7 @@ var Body = React.createClass({
 
   updateSkills(skill) {
     let skills = this.state.skills.filter( (s) => { return s.id != skill.id })
+    skills.push(skill)
 
     this.setState({ skills: skills })
   },

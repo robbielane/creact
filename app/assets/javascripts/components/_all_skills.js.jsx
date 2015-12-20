@@ -8,7 +8,6 @@ var AllSkills = React.createClass({
   // },
 
   onUpdate(skill) {
-    console.log(skill)
     this.props.onUpdate(skill);
   },
 
