@@ -15,8 +15,9 @@ var Skill = React.createClass({
     this.setState({ editable: !this.state.editable })
   },
 
+
   handleLevelChange(action) {
-    let levels  = ['bad', 'halfbad', 'fantastic'];
+    let levels  = ['bad', 'halfbad', 'fantastic']
     let name    = this.props.skill.name;
     let details = this.props.skill.details;
     let level   = this.props.skill.level;
